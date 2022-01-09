@@ -10,7 +10,7 @@ Mongo leaf is a simple tool between you and go-mongodb driver. in leaf we only u
 ## Install
 exute this command on your terminal
 ```
-    go get github.com/aamirmousavi/Mongo-Leaf
+    go get github.com/aamirmousavi/MongoLeaf
 ```
 then in your go code import leaf package
 ```go
