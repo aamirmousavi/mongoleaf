@@ -109,7 +109,7 @@ func (hand colletion) InsertMany(optionQuery string, documents ...string) (map[s
 	}
 	return results, nil
 }
-func (hand colletion) InsertOne(document string, optionQuery string) (map[string]interface{}, error) {
+func (hand colletion) InsertOne(optionQuery string, document string) (map[string]interface{}, error) {
 	documentMap, err := jsonToMap(document)
 	if err != nil {
 		return nil, err
@@ -118,6 +118,7 @@ func (hand colletion) InsertOne(document string, optionQuery string) (map[string
 	if err != nil {
 		return nil, err
 	}
+
 	res, err := hand.Colletion.InsertOne(context.TODO(), documentMap, &op)
 	if err != nil {
 		return nil, err
