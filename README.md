@@ -1,5 +1,5 @@
 # Mongo Leaf
-Mongo leaf is a simple tool between you and go-mongodb driver. in leaf we only use json format to use mongo just like mongo-shell if you have a dynamic senario it's very usfull for you. I'm noob in go and programing sorry for bad explantion so I tryed to make anything simple for noobs like me.
+Mongo leaf is a simple tool between you and go-mongodb driver. in leaf we only use json format to use mongo just like mongo-shell if you have a dynamic scenario it's very useful  for you. I'm noob in go and programing sorry for bad explanation so I tryed to make anything simple for noobs like me.
 
 
 ## Contents
@@ -22,7 +22,7 @@ import (
 
 ## Create Connetion
 
-The way of connecting to mongo database as a client you need to use New function just like this exmaple
+The way of connecting to mongo database as a client you need to use New function just like this example
 ```go
     branch, err := mongoleaf.New("mongodb://localhost:27017")
     if err != nil {
