@@ -40,20 +40,6 @@ func (branch Branch) ListDatabases(filter, optionQuery string) (map[string]inter
 	return structToMap(res)
 }
 
-func (branch Branch) NumberSessionsInProgress() int {
-	return branch.Client.NumberSessionsInProgress()
-}
 func (branch Branch) Ping() error {
 	return branch.Client.Ping(context.TODO(), readpref.Primary())
-}
-func (branch Branch) StartSession(optionsQuery string) (map[string]interface{}, error) {
-	op, err := option.session(optionsQuery)
-	if err != nil {
-		return nil, err
-	}
-	res, err := branch.Client.StartSession(&op)
-	if err != nil {
-		return nil, err
-	}
-	return structToMap(res)
 }
