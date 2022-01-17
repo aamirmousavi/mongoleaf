@@ -12,9 +12,15 @@ func JSON(v interface{}) string {
 
 	return json
 }
-
+func JSONPretty(v interface{}) string {
+	_json, _ := json.MarshalIndent(v, " ", "	")
+	return string(_json)
+}
 func jsonToMap(str string) (map[string]interface{}, error) {
 	var _map map[string]interface{}
+	if str == "" || str == "{}" {
+		return _map, nil
+	}
 	err := json.Unmarshal([]byte(str), &_map)
 	if err != nil {
 		return nil, err
@@ -44,6 +50,7 @@ func interToJson(_map interface{}) (string, error) {
 	}
 	return string(json), nil
 }
+
 func jsonToArrayMap(str string) ([]map[string]interface{}, error) {
 	var _arrMap []map[string]interface{}
 	err := json.Unmarshal([]byte(str), &_arrMap)
