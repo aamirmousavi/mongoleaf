@@ -12,6 +12,9 @@ type optionType struct{}
 
 func (_ optionType) update(option string) (options.UpdateOptions, error) {
 	var op options.UpdateOptions
+	if option == "" || option == "{}" {
+		return op, nil
+	}
 	err := json.Unmarshal([]byte(option), &op)
 	if err != nil {
 		return options.UpdateOptions{}, err
@@ -20,6 +23,9 @@ func (_ optionType) update(option string) (options.UpdateOptions, error) {
 }
 func (_ optionType) delete(option string) (options.DeleteOptions, error) {
 	var op options.DeleteOptions
+	if option == "" || option == "{}" {
+		return op, nil
+	}
 	err := json.Unmarshal([]byte(option), &op)
 	if err != nil {
 		return options.DeleteOptions{}, err
@@ -28,6 +34,9 @@ func (_ optionType) delete(option string) (options.DeleteOptions, error) {
 }
 func (_ optionType) insertMany(option string) (options.InsertManyOptions, error) {
 	var op options.InsertManyOptions
+	if option == "" || option == "{}" {
+		return op, nil
+	}
 	err := json.Unmarshal([]byte(option), &op)
 	if err != nil {
 		return options.InsertManyOptions{}, err
@@ -36,6 +45,9 @@ func (_ optionType) insertMany(option string) (options.InsertManyOptions, error)
 }
 func (_ optionType) insertOne(option string) (options.InsertOneOptions, error) {
 	var op options.InsertOneOptions
+	if option == "" || option == "{}" {
+		return op, nil
+	}
 	err := json.Unmarshal([]byte(option), &op)
 	if err != nil {
 		return options.InsertOneOptions{}, err
@@ -44,6 +56,9 @@ func (_ optionType) insertOne(option string) (options.InsertOneOptions, error) {
 }
 func (_ optionType) aggregate(option string) (options.AggregateOptions, error) {
 	var op options.AggregateOptions
+	if option == "" || option == "{}" {
+		return op, nil
+	}
 	err := json.Unmarshal([]byte(option), &op)
 	if err != nil {
 		return options.AggregateOptions{}, err
@@ -52,6 +67,9 @@ func (_ optionType) aggregate(option string) (options.AggregateOptions, error) {
 }
 func (_ optionType) find(option string) (options.FindOptions, error) {
 	var op options.FindOptions
+	if option == "" || option == "{}" {
+		return op, nil
+	}
 	err := json.Unmarshal([]byte(option), &op)
 	if err != nil {
 		return options.FindOptions{}, err
@@ -61,6 +79,9 @@ func (_ optionType) find(option string) (options.FindOptions, error) {
 
 func (_ optionType) findOne(option string) (options.FindOneOptions, error) {
 	var op options.FindOneOptions
+	if option == "" || option == "{}" {
+		return op, nil
+	}
 	err := json.Unmarshal([]byte(option), &op)
 	if err != nil {
 		return options.FindOneOptions{}, err
@@ -69,6 +90,9 @@ func (_ optionType) findOne(option string) (options.FindOneOptions, error) {
 }
 func (_ optionType) countDocuments(option string) (options.CountOptions, error) {
 	var op options.CountOptions
+	if option == "" || option == "{}" {
+		return op, nil
+	}
 	err := json.Unmarshal([]byte(option), &op)
 	if err != nil {
 		return options.CountOptions{}, err
@@ -77,6 +101,9 @@ func (_ optionType) countDocuments(option string) (options.CountOptions, error) 
 }
 func (_ optionType) distinct(option string) (options.DistinctOptions, error) {
 	var op options.DistinctOptions
+	if option == "" || option == "{}" {
+		return op, nil
+	}
 	err := json.Unmarshal([]byte(option), &op)
 	if err != nil {
 		return options.DistinctOptions{}, err
@@ -85,6 +112,9 @@ func (_ optionType) distinct(option string) (options.DistinctOptions, error) {
 }
 func (_ optionType) findOneAndUpdate(option string) (options.FindOneAndUpdateOptions, error) {
 	var op options.FindOneAndUpdateOptions
+	if option == "" || option == "{}" {
+		return op, nil
+	}
 	err := json.Unmarshal([]byte(option), &op)
 	if err != nil {
 		return options.FindOneAndUpdateOptions{}, err
@@ -93,6 +123,9 @@ func (_ optionType) findOneAndUpdate(option string) (options.FindOneAndUpdateOpt
 }
 func (_ optionType) findOneAndReplace(option string) (options.FindOneAndReplaceOptions, error) {
 	var op options.FindOneAndReplaceOptions
+	if option == "" || option == "{}" {
+		return op, nil
+	}
 	err := json.Unmarshal([]byte(option), &op)
 	if err != nil {
 		return options.FindOneAndReplaceOptions{}, err
@@ -101,6 +134,9 @@ func (_ optionType) findOneAndReplace(option string) (options.FindOneAndReplaceO
 }
 func (_ optionType) findOneAndDelete(option string) (options.FindOneAndDeleteOptions, error) {
 	var op options.FindOneAndDeleteOptions
+	if option == "" || option == "{}" {
+		return op, nil
+	}
 	err := json.Unmarshal([]byte(option), &op)
 	if err != nil {
 		return options.FindOneAndDeleteOptions{}, err
@@ -112,6 +148,9 @@ func (_ optionType) findOneAndDelete(option string) (options.FindOneAndDeleteOpt
 
 func (_ optionType) createCollection(option string) (options.CreateCollectionOptions, error) {
 	var op options.CreateCollectionOptions
+	if option == "" || option == "{}" {
+		return op, nil
+	}
 	err := json.Unmarshal([]byte(option), &op)
 	if err != nil {
 		return options.CreateCollectionOptions{}, err
@@ -120,6 +159,9 @@ func (_ optionType) createCollection(option string) (options.CreateCollectionOpt
 }
 func (_ optionType) createView(option string) (options.CreateViewOptions, error) {
 	var op options.CreateViewOptions
+	if option == "" || option == "{}" {
+		return op, nil
+	}
 	err := json.Unmarshal([]byte(option), &op)
 	if err != nil {
 		return options.CreateViewOptions{}, err
@@ -128,6 +170,9 @@ func (_ optionType) createView(option string) (options.CreateViewOptions, error)
 }
 func (_ optionType) listCollections(option string) (options.ListCollectionsOptions, error) {
 	var op options.ListCollectionsOptions
+	if option == "" || option == "{}" {
+		return op, nil
+	}
 	err := json.Unmarshal([]byte(option), &op)
 	if err != nil {
 		return options.ListCollectionsOptions{}, err
@@ -137,6 +182,9 @@ func (_ optionType) listCollections(option string) (options.ListCollectionsOptio
 
 func (_ optionType) listDatabaseNames(option string) (options.ListDatabasesOptions, error) {
 	var op options.ListDatabasesOptions
+	if option == "" || option == "{}" {
+		return op, nil
+	}
 	err := json.Unmarshal([]byte(option), &op)
 	if err != nil {
 		return options.ListDatabasesOptions{}, err
@@ -145,6 +193,9 @@ func (_ optionType) listDatabaseNames(option string) (options.ListDatabasesOptio
 }
 func (_ optionType) session(option string) (options.SessionOptions, error) {
 	var op options.SessionOptions
+	if option == "" || option == "{}" {
+		return op, nil
+	}
 	err := json.Unmarshal([]byte(option), &op)
 	if err != nil {
 		return options.SessionOptions{}, err
@@ -153,6 +204,9 @@ func (_ optionType) session(option string) (options.SessionOptions, error) {
 }
 func (_ optionType) runCmd(option string) (options.RunCmdOptions, error) {
 	var op options.RunCmdOptions
+	if option == "" || option == "{}" {
+		return op, nil
+	}
 	err := json.Unmarshal([]byte(option), &op)
 	if err != nil {
 		return options.RunCmdOptions{}, err
