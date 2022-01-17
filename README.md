@@ -1,5 +1,5 @@
 # Mongo Leaf
-Mongo leaf is a simple tool between you and go.mongodb.org/mongo-driver. in leaf we only use json format to use mongo just like mongo-shell if you have a dynamic senario it's very usfull for you. I'm noob in go and programing sorry for bad explantion so I tryed to make anything simple for noobs like me.
+Mongo leaf is a simple tool between you and go-mongodb driver. in leaf we only use json format to use mongo just like mongo-shell if you have a dynamic scenario mongo leaf might be useful for you. I'm noob in go and programing sorry for bad explantion so I tryed to make anything simple for noobs like me.
 
 
 # Contents
