@@ -82,7 +82,7 @@ if database or colletion you calling is not exsists it will create them
 
 # Simple Example
 ```go
-    package main
+package main
 
 import (
 	"fmt"
