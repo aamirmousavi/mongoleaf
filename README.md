@@ -34,48 +34,46 @@ Mongo leaf is a simple tool between you and go.mongodb.org/mongo-driver. in leaf
 
 
 # Install
-exute this command on your terminal
+first execute this command
 ```
     go get github.com/aamirmousavi/mongoleaf
 ```
 then in your go code import leaf package
 ```go
 import (
-   mongoleaf "github.com/aamirmousavi/mongoleaf"
+   "github.com/aamirmousavi/mongoleaf"
 )
 ```
 
 
 # Create Connetion
 
-The way of connecting to mongo database as a client you need to use New function just like this exmaple
+for connect to mongodb 
 ```go
     client, err := mongoleaf.New("mongodb://localhost:27017")
     if err != nil {
-		fmt.Println("error ", err)
-		return
+        //deal with error
 	}
 ```
-it's take a  parameter as URI of your mongodb and connect you to your database
+put your mongo URL as an argument for make connetion with your database
 
 
 # Create Database
 
-in your mongodb client if you want to create or refrence to a database you would use DataBase Function just like this example
+in your mongodb client if you want to create or refrence to a database you would use DataBase Function just like this 
+for making a refrence to your database
 ```go
     client, err := mongoleaf.New("mongodb://localhost:27017")
     if err != nil {
-        fmt.Println("error ", err)
-        return
+         //deal with error
     }
     myDataBase := client.DataBase("myDBName")
 ```
-I think you undrastand now what client means if you used original mongo driver for golang it's just like **mongo.Client** in original driver
-
+now you can esly access the colletions and function of each database you have
 
 # Create Colletion
 
-as you now in mongo each database can have many collations so when you define a database you can call or create a collation in that database just like this example
+as you now in mongo each database might have many collations so when you define a database you can call or create a collation in that database just like this example
 ```go
 myCollation := client.DataBase("DbName").Colletion("myCollation")
 ```
@@ -83,12 +81,88 @@ if database or colletion you calling is not exsists it will create them
 
 
 # Simple Example
+```go
+    package main
 
+import (
+	"fmt"
+
+	"github.com/aamirmousavi/mongoleaf"
+)
+
+func main() {
+	client, err := mongoleaf.New("mongodb://localhost:27017")
+	if err != nil {
+		panic(err)
+	}
+
+	siteDB := client.DataBase("website")
+	products := siteDB.Colletion("products")
+
+	products.InsertMany("", `{
+		"title":"pro_1",
+		"price":5
+	}`, `{
+		"title":"pro_2",
+		"price":2
+	}`, `{
+		"title":"pro_3",
+		"price":15
+	}`)
+
+	//first arg is filter that mongo filter rows and second is the update you want to set
+	//and last is option if you don't have any option use empty string or empty json map: "" or "{}"
+	result, err := products.UpdateMany(`{
+		"price":{
+			"$gt":10
+		}
+	}`, `{
+		"$set":{
+			"more_than_10":true
+		}
+	}`, "")
+
+	fmt.Printf("update \n\terror: %v \nr\tesult: %v \n", err, result)
+
+	//if your filter is "{}" you can also use empty string as no filter
+	//it will return all rows in a colletion
+	rows, err := products.Find("", "")
+	jsonRows := mongoleaf.JSONPretty(rows)
+	fmt.Printf("find result \n\terror: %v \n\trows: %v \n", err, jsonRows)
+}
+
+```
+OutPut
+```
+update 
+        error: <nil> 
+r       esult: map[MatchedCount:1 ModifiedCount:1 UpsertedCount:0 UpsertedID:<nil>] 
+find result 
+        error: <nil> 
+        rows: [
+        {
+                "_id": "61e4bf46d16388a583426754",
+                "price": 5,
+                "title": "pro_1"
+        },
+        {
+                "_id": "61e4bf46d16388a583426755",
+                "price": 2,
+                "title": "pro_2"
+        },
+        {
+                "_id": "61e4bf46d16388a583426756",
+                "more_than_10": true,
+                "price": 15,
+                "title": "pro_3"
+        }
+ ] 
+```
 # Functions
 
 - # Client Functions
 
-    you alway able to use dirvers functions like start session or watch and extra like this example
+    you always able to use dirvers functions like start session or watch and extra like this example
     ```go
         client, err := mongoleaf.New("mongodb://localhost:27017")
         if err != nil {
@@ -112,7 +186,7 @@ if database or colletion you calling is not exsists it will create them
 
     - # ListDatabaseNames
         ````go
-            filter, option := `{}`, `{}` //empty filter return all
+            filter, option := `{}`, `{}` //empty filter return all 
             dbNames, err := client.ListDatabaseNames(filter, option)
         ````
 
@@ -180,6 +254,7 @@ if database or colletion you calling is not exsists it will create them
         results, err := myCollation.FindOne(`{"title":"my title"}`,``)
         ```
         as you see we don't have any option we should pass empty  `` "" `` or `` `{}` `` as option 
+        also if you have empty filter you can use empty string `` "" `` or `` `{}` `` as filter
 
     - # Aggregate
 
