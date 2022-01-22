@@ -122,7 +122,7 @@ func main() {
 		}
 	}`, "")
 
-	fmt.Printf("update \n\terror: %v \nr\tesult: %v \n", err, result)
+	fmt.Printf("update \n\terror: %v \n\tresult: %v \n", err, result)
 
 	//if your filter is "{}" you can also use empty string as no filter
 	//it will return all rows in a colletion
@@ -136,7 +136,7 @@ OutPut
 ```
 update 
         error: <nil> 
-r       esult: map[MatchedCount:1 ModifiedCount:1 UpsertedCount:0 UpsertedID:<nil>] 
+	result: map[MatchedCount:1 ModifiedCount:1 UpsertedCount:0 UpsertedID:<nil>] 
 find result 
         error: <nil> 
         rows: [
