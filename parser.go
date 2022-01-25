@@ -51,19 +51,21 @@ func interToJson(_map interface{}) (string, error) {
 	return string(json), nil
 }
 
-func jsonToArrayMap(str string) ([]map[string]interface{}, error) {
+func jsonToArrayMap(str string) ([]interface{}, error) {
 	var _arrMap []map[string]interface{}
 	err := json.Unmarshal([]byte(str), &_arrMap)
 	if err != nil {
 		return nil, err
 	}
+	arr := make([]interface{}, 0)
 	for i := range _arrMap {
 		_arrMap[i], err = convertId(_arrMap[i])
 		if err != nil {
 			return nil, err
 		}
+		arr = append(arr, _arrMap[i])
 	}
-	return _arrMap, nil
+	return arr, nil
 }
 func convertIdToObject(value interface{}) (primitive.ObjectID, error) {
 	if strHex, ok := value.(string); ok {
