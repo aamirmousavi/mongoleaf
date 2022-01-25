@@ -1,6 +1,8 @@
 package mongoleaf
 
-import "context"
+import (
+	"context"
+)
 
 func (hand colletion) Aggregate(pipline, optionQuery string) ([]map[string]interface{}, error) {
 	piplineMap, err := jsonToArrayMap(pipline)
@@ -8,7 +10,7 @@ func (hand colletion) Aggregate(pipline, optionQuery string) ([]map[string]inter
 		return nil, err
 	}
 
-	op, err := option.aggregate(optionQuery)
+	op, err := option.Database.aggregate(optionQuery)
 	if err != nil {
 		return nil, err
 	}
@@ -32,7 +34,7 @@ func (hand colletion) Find(filter, optionQuery string) ([]map[string]interface{}
 		return nil, err
 	}
 
-	op, err := option.find(optionQuery)
+	op, err := option.Database.Colletion.find(optionQuery)
 	if err != nil {
 		return nil, err
 	}
@@ -55,7 +57,7 @@ func (hand colletion) FindOne(filter, optionQuery string) (map[string]interface{
 		return nil, err
 	}
 
-	op, err := option.findOne(optionQuery)
+	op, err := option.Database.Colletion.findOne(optionQuery)
 	if err != nil {
 		return nil, err
 	}
@@ -78,7 +80,7 @@ func (hand colletion) UpdateMany(filter, update, optionQuery string) (map[string
 	if err != nil {
 		return nil, err
 	}
-	op, err := option.update(optionQuery)
+	op, err := option.Database.Colletion.update(optionQuery)
 	if err != nil {
 		return nil, err
 	}
@@ -98,7 +100,7 @@ func (hand colletion) UpdateOne(filter, update, optionQuery string) (map[string]
 	if err != nil {
 		return nil, err
 	}
-	op, err := option.update(optionQuery)
+	op, err := option.Database.Colletion.update(optionQuery)
 	if err != nil {
 		return nil, err
 	}
@@ -114,7 +116,7 @@ func (hand colletion) DeleteMany(filter, optionQuery string) (map[string]interfa
 	if err != nil {
 		return nil, err
 	}
-	op, err := option.delete(optionQuery)
+	op, err := option.Database.Colletion.delete(optionQuery)
 	if err != nil {
 		return nil, err
 	}
@@ -130,7 +132,7 @@ func (hand colletion) DeleteOne(filter, optionQuery string) (map[string]interfac
 	if err != nil {
 		return nil, err
 	}
-	op, err := option.delete(optionQuery)
+	op, err := option.Database.Colletion.delete(optionQuery)
 	if err != nil {
 		return nil, err
 	}
@@ -141,16 +143,12 @@ func (hand colletion) DeleteOne(filter, optionQuery string) (map[string]interfac
 	return structToMap(res)
 }
 
-func (hand colletion) InsertMany(optionQuery string, documents ...string) (map[string]interface{}, error) {
-	records := make([]interface{}, 0)
-	for i := range documents {
-		d, err := jsonToMap(documents[i])
-		if err != nil {
-			return nil, err
-		}
-		records = append(records, d)
+func (hand colletion) InsertMany(documents, optionQuery string) (map[string]interface{}, error) {
+	records, err := jsonToArrayMap(documents)
+	if err != nil {
+		return nil, err
 	}
-	op, err := option.insertMany(optionQuery)
+	op, err := option.Database.Colletion.insertMany(optionQuery)
 	if err != nil {
 		return nil, err
 	}
@@ -161,12 +159,12 @@ func (hand colletion) InsertMany(optionQuery string, documents ...string) (map[s
 	return structToMap(res)
 }
 
-func (hand colletion) InsertOne(optionQuery, document string) (map[string]interface{}, error) {
+func (hand colletion) InsertOne(document, optionQuery string) (map[string]interface{}, error) {
 	documentMap, err := jsonToMap(document)
 	if err != nil {
 		return nil, err
 	}
-	op, err := option.insertOne(optionQuery)
+	op, err := option.Database.Colletion.insertOne(optionQuery)
 	if err != nil {
 		return nil, err
 	}
@@ -183,7 +181,7 @@ func (hand colletion) CountDocuments(filter, optionQuery string) (int64, error) 
 	if err != nil {
 		return 0, err
 	}
-	op, err := option.countDocuments(optionQuery)
+	op, err := option.Database.Colletion.countDocuments(optionQuery)
 	if err != nil {
 		return 0, err
 	}
@@ -191,7 +189,7 @@ func (hand colletion) CountDocuments(filter, optionQuery string) (int64, error) 
 }
 
 func (hand colletion) Distinct(fieldName, optionQuery string) ([]interface{}, error) {
-	op, err := option.distinct(optionQuery)
+	op, err := option.Database.Colletion.distinct(optionQuery)
 	if err != nil {
 		return nil, err
 	}
@@ -221,7 +219,7 @@ func (hand colletion) FindOneAndReplace(filter, replacement, optionQuery string)
 	if err != nil {
 		return nil, err
 	}
-	op, err := option.findOneAndReplace(optionQuery)
+	op, err := option.Database.Colletion.findOneAndReplace(optionQuery)
 	if err != nil {
 		return nil, err
 	}
@@ -235,7 +233,7 @@ func (hand colletion) FindOneAndDelete(filter, optionQuery string) (map[string]i
 	if err != nil {
 		return nil, err
 	}
-	op, err := option.findOneAndDelete(optionQuery)
+	op, err := option.Database.Colletion.findOneAndDelete(optionQuery)
 	if err != nil {
 		return nil, err
 	}
