@@ -36,7 +36,7 @@ Mongo leaf is a simple tool between you and go-mongodb driver. in leaf we only u
 # Install
 first execute this command
 ```
-go get github.com/aamirmousavi/mongoleaf
+    go get github.com/aamirmousavi/mongoleaf
 ```
 then in your go code import leaf package
 ```go
@@ -99,17 +99,29 @@ func main() {
 	siteDB := client.DataBase("website")
 	products := siteDB.Colletion("products")
 
-	products.InsertMany("", `{
+	products.InsertMany(`[
+		{
 		"title":"pro_1",
 		"price":5
-	}`, `{
+	}, {
 		"title":"pro_2",
 		"price":2
-	}`, `{
+	}, {
 		"title":"pro_3",
 		"price":15
-	}`)
+	}
+	]`, "")
 
+    //simple index
+	products.CreateIndex(`{
+		"Keys":{
+			"price":1
+		},
+		"Options":{
+			"Name":"myPriceIndex"
+		}
+	}`, ``)
+    
 	//first arg is filter that mongo filter rows and second is the update you want to set
 	//and last is option if you don't have any option use empty string or empty json map: "" or "{}"
 	result, err := products.UpdateMany(`{
@@ -136,7 +148,7 @@ OutPut
 ```
 update 
         error: <nil> 
-	result: map[MatchedCount:1 ModifiedCount:1 UpsertedCount:0 UpsertedID:<nil>] 
+        result: map[MatchedCount:1 ModifiedCount:1 UpsertedCount:0 UpsertedID:<nil>] 
 find result 
         error: <nil> 
         rows: [
@@ -276,17 +288,17 @@ find result
         result, err := myCollation.DeleteOne(`{"_id":"sd1d12ds12d..."}`,option) 
         ```
     - # Insert
-        for inserting if you are using insert many you have a little difrent parameters
+        for inserting if you are using insert many you have to insert your rows in an array parent
         ```go
-        result, err := myCollation.InsertMany(option,`{"title":"the title 1"}`,`{"title":"the title 12"}`,`{"title":"the title 2"}`) 
-        ```
-        in isert many you can insert many rows you want just with adding a new  
-        ```go 
-        func (hand colletion) InsertMany(optionQuery , documents ...) (map[]interface{}, error) 
+        result, err := myCollation.InsertMany(`[
+            {"title":"the title 1"},
+            {"title":"the title 12"},
+            {"title":"the title 2"}
+            ]`,option) 
         ```
         for insetring one row 
         ```go
-        result, err := myCollation.InsertOne(option,`{"title":"the title 1"}`) 
+        result, err := myCollation.InsertOne(`{"title":"the title 1"}`,option) 
         ```
 
     - # FindOneAnd
