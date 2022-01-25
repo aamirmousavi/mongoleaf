@@ -9,7 +9,7 @@ func (db dataBase) Aggregate(pipline, optionQuery string) ([]map[string]interfac
 	if err != nil {
 		return nil, err
 	}
-	op, err := option.aggregate(optionQuery)
+	op, err := option.Database.aggregate(optionQuery)
 	if err != nil {
 		return nil, err
 	}
@@ -31,7 +31,7 @@ func (db dataBase) Drop() error {
 }
 
 func (db dataBase) CreateCollection(name, optionQuery string) error {
-	op, err := option.createCollection(optionQuery)
+	op, err := option.Database.createCollection(optionQuery)
 	if err != nil {
 		return err
 	}
@@ -43,7 +43,7 @@ func (db dataBase) CreateView(viewName, viewOn, pipline, optionQuery string) err
 	if err != nil {
 		return err
 	}
-	op, err := option.createView(optionQuery)
+	op, err := option.Database.createView(optionQuery)
 	if err != nil {
 		return err
 	}
@@ -55,7 +55,7 @@ func (db dataBase) ListCollectionNames(filter, optionQuery string) ([]string, er
 	if err != nil {
 		return nil, err
 	}
-	op, err := option.listCollections(optionQuery)
+	op, err := option.Database.listCollections(optionQuery)
 	if err != nil {
 		return nil, err
 	}
@@ -67,7 +67,7 @@ func (db dataBase) ListCollections(filter, optionQuery string) ([]map[string]int
 	if err != nil {
 		return nil, err
 	}
-	op, err := option.listCollections(optionQuery)
+	op, err := option.Database.listCollections(optionQuery)
 	if err != nil {
 		return nil, err
 	}
@@ -90,7 +90,7 @@ func (db dataBase) RunCommand(cmd, optionQuery string) (map[string]interface{}, 
 	if err != nil {
 		return nil, err
 	}
-	op, err := option.runCmd(optionQuery)
+	op, err := option.Database.runCmd(optionQuery)
 	if err != nil {
 		return nil, err
 	}
@@ -103,7 +103,7 @@ func (db dataBase) RunCommandCursor(cmd, optionQuery string) ([]map[string]inter
 	if err != nil {
 		return nil, err
 	}
-	op, err := option.runCmd(optionQuery)
+	op, err := option.Database.runCmd(optionQuery)
 	if err != nil {
 		return nil, err
 	}
