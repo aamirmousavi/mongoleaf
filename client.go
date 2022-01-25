@@ -18,7 +18,7 @@ func (branch Branch) ListDatabaseNames(filter, optionQuery string) ([]string, er
 	if err != nil {
 		return nil, err
 	}
-	op, err := option.listDatabaseNames(optionQuery)
+	op, err := option.listDatabase(optionQuery)
 	if err != nil {
 		return nil, err
 	}
@@ -29,7 +29,7 @@ func (branch Branch) ListDatabases(filter, optionQuery string) (map[string]inter
 	if err != nil {
 		return nil, err
 	}
-	op, err := option.listDatabaseNames(optionQuery)
+	op, err := option.listDatabase(optionQuery)
 	if err != nil {
 		return nil, err
 	}
