@@ -19,7 +19,7 @@ func (hand colletion) Aggregate(pipline, optionQuery string) ([]map[string]inter
 	if err != nil {
 		return nil, err
 	}
-
+	defer cursor.Close(context.TODO())
 	var results []map[string]interface{}
 	if err = cursor.All(context.TODO(), &results); err != nil {
 		return nil, err
@@ -43,6 +43,7 @@ func (hand colletion) Find(filter, optionQuery string) ([]map[string]interface{}
 	if err != nil {
 		return nil, err
 	}
+	defer cursor.Close(context.TODO())
 	var results []map[string]interface{}
 	if err = cursor.All(context.TODO(), &results); err != nil {
 		return nil, err
